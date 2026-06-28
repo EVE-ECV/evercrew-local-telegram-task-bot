@@ -8,8 +8,8 @@ structured task information.
 import json
 from pathlib import Path
 
-from llm import ask_llm
-from models import Task
+from app.llm import ask_llm
+from app.models import Task
 
 
 PROMPT_PATH = Path(__file__).resolve().parent.parent / "prompts" / "task_prompt.txt"
