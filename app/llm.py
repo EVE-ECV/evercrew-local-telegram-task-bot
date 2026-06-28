@@ -6,7 +6,7 @@ Handles communication with the local Ollama server.
 
 import ollama
 
-from config import (
+from app.config import (
     OLLAMA_HOST,
     OLLAMA_MODEL
 )
