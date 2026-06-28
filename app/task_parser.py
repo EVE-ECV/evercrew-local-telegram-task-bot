@@ -33,6 +33,17 @@ def parse_task(message: str) -> Task:
     prompt = prompt_template.replace("{message}", message)
 
     llm_response = ask_llm(prompt)
-    task_data = json.loads(llm_response)
 
-    return Task(**task_data)
+    try:
+        task_data = json.loads(llm_response)
+        return Task(**task_data)
+
+    except Exception:
+        return Task(
+            employee="Not specified",
+            task="Unable to parse task",
+            deadline="Not specified",
+            priority="Normal",
+            summary="The AI response could not be converted into a structured task.",
+            confirmation_question="Do you want to review this instruction manually?"
+        )
