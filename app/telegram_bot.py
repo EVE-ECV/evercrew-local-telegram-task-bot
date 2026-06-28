@@ -68,12 +68,12 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     reply_markup = InlineKeyboardMarkup(keyboard)
 
     reply = (
-        "Task Preview\n\n"
-        f"Employee: {task['employee']}\n"
-        f"Task: {task['task']}\n"
-        f"Deadline: {task['deadline']}\n"
-        f"Priority: {task['priority']}\n\n"
-        f"Summary: {task['summary']}\n\n"
+        "📋 Task Preview\n\n"
+        f"👤 Employee: {task['employee']}\n"
+        f"📝 Task: {task['task']}\n"
+        f"📅 Deadline: {task['deadline']}\n"
+        f"⚡ Priority: {task['priority']}\n\n"
+        f"📖 Summary:\n{task['summary']}\n\n"
         f"{task['confirmation_question']}"
     )
 
@@ -94,31 +94,79 @@ async def handle_confirmation(update: Update, context: ContextTypes.DEFAULT_TYPE
     action, session_id = query.data.split(":", 1)
 
     if action == "confirm":
+
         result = engine.confirm_task(session_id)
 
         if result["status"] == "assigned":
+
             task = result["task"]
+            employee_record = result.get("employee_record")
 
             reply = (
-                "Task confirmed and assigned.\n\n"
-                f"Employee: {task['employee']}\n"
-                f"Task: {task['task']}\n"
-                f"Deadline: {task['deadline']}\n"
-                f"Priority: {task['priority']}\n\n"
-                "Next step: employee notification will be added in the next version."
+                "✅ Task confirmed.\n\n"
+                f"👤 Employee: {task['employee']}\n"
+                f"📝 Task: {task['task']}\n"
+                f"📅 Deadline: {task['deadline']}\n"
+                f"⚡ Priority: {task['priority']}\n"
             )
+
+            # Send task to employee if Telegram Chat ID exists
+            if employee_record and employee_record.get("telegram_chat_id"):
+
+                employee_message = (
+                    "📢 New Task Assigned\n\n"
+                    f"📝 Task:\n{task['task']}\n\n"
+                    f"📅 Deadline: {task['deadline']}\n"
+                    f"⚡ Priority: {task['priority']}\n\n"
+                    f"📖 Summary:\n{task['summary']}\n\n"
+                    "Please reply:\n"
+                    "✅ DONE\n"
+                    "when you have completed the task."
+                )
+
+                try:
+                    await context.bot.send_message(
+                        chat_id=employee_record["telegram_chat_id"],
+                        text=employee_message
+                    )
+
+                    reply += "\n\n📨 Task successfully sent to employee."
+
+                except Exception as e:
+
+                    reply += (
+                        "\n\n⚠ Unable to send Telegram message to employee.\n"
+                        f"Reason: {str(e)}"
+                    )
+
+            else:
+
+                reply += (
+                    "\n\n⚠ Employee Telegram Chat ID not found.\n"
+                    "Task was confirmed but not delivered."
+                )
+
         else:
+
             reply = result["message"]
 
     elif action == "cancel":
+
         result = engine.cancel_task(session_id)
 
         if result["status"] == "cancelled":
-            reply = "Task cancelled. No employee message was sent."
+
+            reply = (
+                "❌ Task cancelled.\n\n"
+                "No employee message was sent."
+            )
+
         else:
+
             reply = result["message"]
 
     else:
+
         reply = "Unknown action."
 
     await query.edit_message_text(reply)
@@ -130,13 +178,34 @@ def run_bot():
     """
 
     if not TELEGRAM_BOT_TOKEN:
-        raise ValueError("TELEGRAM_BOT_TOKEN is missing. Please update your .env file.")
+        raise ValueError(
+            "TELEGRAM_BOT_TOKEN is missing. Please update your .env file."
+        )
 
-    app = Application.builder().token(TELEGRAM_BOT_TOKEN).build()
+    app = Application.builder().token(
+        TELEGRAM_BOT_TOKEN
+    ).build()
 
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
-    app.add_handler(CallbackQueryHandler(handle_confirmation))
+    app.add_handler(
+        CommandHandler(
+            "start",
+            start
+        )
+    )
 
-    print("Telegram bot is running...")
+    app.add_handler(
+        MessageHandler(
+            filters.TEXT & ~filters.COMMAND,
+            handle_message
+        )
+    )
+
+    app.add_handler(
+        CallbackQueryHandler(
+            handle_confirmation
+        )
+    )
+
+    print("🚀 EVE Telegram Bot is running...")
+
     app.run_polling()
