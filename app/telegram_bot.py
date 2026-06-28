@@ -34,7 +34,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await update.message.reply_text(
         "Hello, I am EVE.\n\n"
-        "Send me a boss instruction and I will convert it into a clear employee task."
+        "Send me a boss instruction and I will convert it into a clear employee task.\n\n"
+        "Employees can reply DONE after completing an assigned task."
     )
 
 
@@ -43,8 +44,39 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     Handle normal Telegram messages.
     """
 
-    message = update.message.text
+    message = update.message.text.strip()
 
+    # Employee completion flow
+    if message.upper() == "DONE":
+
+        employee_name = update.effective_user.first_name
+
+        result = engine.complete_task(employee_name)
+
+        if result["status"] == "completed":
+
+            task = result["task"]
+
+            await update.message.reply_text(
+                "✅ Task marked as completed.\n\n"
+                "Your boss has been notified."
+            )
+
+            # Boss notification will be improved in the next step.
+            print(
+                f"Task completed by {employee_name}: "
+                f"{task['task']}"
+            )
+
+        else:
+
+            await update.message.reply_text(
+                result["message"]
+            )
+
+        return
+
+    # Boss instruction flow
     result = engine.process_message(message)
 
     task = result["task"]
@@ -110,7 +142,6 @@ async def handle_confirmation(update: Update, context: ContextTypes.DEFAULT_TYPE
                 f"⚡ Priority: {task['priority']}\n"
             )
 
-            # Send task to employee if Telegram Chat ID exists
             if employee_record and employee_record.get("telegram_chat_id"):
 
                 employee_message = (
@@ -120,7 +151,7 @@ async def handle_confirmation(update: Update, context: ContextTypes.DEFAULT_TYPE
                     f"⚡ Priority: {task['priority']}\n\n"
                     f"📖 Summary:\n{task['summary']}\n\n"
                     "Please reply:\n"
-                    "✅ DONE\n"
+                    "DONE\n"
                     "when you have completed the task."
                 )
 
