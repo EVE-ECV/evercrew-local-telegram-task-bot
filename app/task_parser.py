@@ -5,9 +5,11 @@ Converts natural language instructions into
 structured task information.
 """
 
+import json
 from pathlib import Path
 
 from llm import ask_llm
+from models import Task
 
 
 PROMPT_PATH = Path(__file__).resolve().parent.parent / "prompts" / "task_prompt.txt"
@@ -21,13 +23,16 @@ def load_task_prompt() -> str:
     return PROMPT_PATH.read_text(encoding="utf-8")
 
 
-def parse_task(message: str) -> str:
+def parse_task(message: str) -> Task:
     """
     Ask the LLM to convert a boss's instruction
-    into structured task information.
+    into a structured Task object.
     """
 
     prompt_template = load_task_prompt()
     prompt = prompt_template.replace("{message}", message)
 
-    return ask_llm(prompt)
+    llm_response = ask_llm(prompt)
+    task_data = json.loads(llm_response)
+
+    return Task(**task_data)
