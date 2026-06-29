@@ -4,6 +4,19 @@ The Local AI Operating System for SMEs
 Evercrew Venture Pte Ltd, Singapore
 ===================================
 
+⭐ BEFORE YOU START ⭐
+
+For the easiest installation experience,
+please open:
+
+QUICK START.pdf
+
+It contains a step-by-step illustrated guide with screenshots.
+
+You can always return to this text guide if needed.
+
+============================================================
+
 WELCOME!
 
 Thank you for trying EVE.
