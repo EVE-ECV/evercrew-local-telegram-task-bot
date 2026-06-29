@@ -1,0 +1,168 @@
+============================================================
+EVE v0.1 Alpha
+The Local AI Operating System for SMEs
+Evercrew Venture Pte Ltd, Singapore
+===================================
+
+WELCOME!
+
+Thank you for trying EVE.
+
+This guide is written for beginners.
+You do NOT need any programming experience.
+
+Simply follow the steps below.
+
+============================================================
+STEP 1 - Install Python
+=======================
+
+Download Python from:
+
+https://www.python.org/downloads/
+
+During installation, make sure you tick:
+
+[✓] Add Python to PATH
+
+Then complete the installation.
+
+============================================================
+STEP 2 - Install Ollama
+=======================
+
+Download Ollama from:
+
+https://ollama.com/download
+
+Install using the default settings.
+
+============================================================
+STEP 3 - Download the AI Model
+==============================
+
+Open Command Prompt.
+
+Type:
+
+ollama pull llama3.2:3b
+
+Wait for the download to complete.
+
+This only needs to be done once.
+
+============================================================
+STEP 4 - Install EVE
+====================
+
+Double-click:
+
+Install EVE.bat
+
+The installer will automatically:
+
+• Check Python
+• Check Ollama
+• Install the required Python packages
+• Create the .env file (if needed)
+
+============================================================
+STEP 5 - Create Your Telegram Bot
+=================================
+
+Open Telegram.
+
+Search for:
+
+BotFather
+
+Create a new bot by following BotFather's instructions.
+
+Copy your Bot Token.
+
+============================================================
+STEP 6 - Configure EVE
+======================
+
+Open the file:
+
+.env
+
+Replace the placeholder values with your own settings.
+
+At minimum, update:
+
+BOT_TOKEN=YOUR_TELEGRAM_BOT_TOKEN
+
+============================================================
+STEP 7 - Add Your Employees
+===========================
+
+Open:
+
+data\employees.json
+
+Replace the sample employees with your own employee names and Telegram Chat IDs.
+
+Save the file.
+
+============================================================
+STEP 8 - Start EVE
+==================
+
+Double-click:
+
+Start EVE.bat
+
+If everything is configured correctly, EVE will start.
+
+IMPORTANT:
+
+Do NOT close the Command Prompt window while EVE is running.
+
+============================================================
+STEP 9 - Test EVE
+=================
+
+Open Telegram.
+
+Send a message to your EVE bot, for example:
+
+Ask Ah Tan to prepare the June sales report by Friday.
+
+EVE will:
+
+• Understand your request
+• Confirm the task with you
+• Assign the task to your employee
+• Notify you when the task is completed
+
+Congratulations!
+
+Your first local AI workflow is now running.
+
+============================================================
+Need Help?
+==========
+
+Website:
+https://evercrew.ai
+
+Email:
+[support@evercrew.ai](mailto:support@evercrew.ai)
+
+GitHub:
+https://github.com/EVE-ECV/EVE
+
+============================================================
+Thank You
+=========
+
+EVE is an open-source project by:
+
+Evercrew Venture Pte Ltd
+Singapore
+
+We hope EVE helps SMEs adopt practical, private and affordable AI.
+
+Happy building!
