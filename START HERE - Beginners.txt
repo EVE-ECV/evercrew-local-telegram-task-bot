@@ -2,7 +2,7 @@
 EVE v0.1.0 Alpha
 The Local AI Operating System for SMEs
 Evercrew Venture Pte Ltd, Singapore
-===================================
+============================================================
 
 ⭐ BEFORE YOU START ⭐
 
@@ -16,15 +16,41 @@ It contains a step-by-step illustrated guide with screenshots.
 You can always return to this text guide if needed.
 
 ============================================================
-WELCOME!
-========
+IMPORTANT - THIS IS AN ALPHA RELEASE
+====================================
 
-Thank you for downloading EVE.
+EVE v0.1.0 Alpha is an early testing version.
 
-This guide is written for beginners.
-No programming experience is required.
+It is intended for evaluation, learning and testing.
 
-Simply follow the steps below.
+Please do not use it yet for critical or sensitive business
+operations.
+
+============================================================
+STEP 0 - Before Installing EVE
+==============================
+
+You should have already:
+
+✓ Downloaded EVE from:
+
+https://github.com/EVE-ECV/EVE
+
+✓ Clicked:
+
+Code
+↓
+
+Download ZIP
+
+✓ Extracted the ZIP file.
+
+You should now have a normal folder called something similar to:
+
+EVE-main
+
+If you are still viewing the GitHub website,
+please download and extract EVE first.
 
 ============================================================
 STEP 1 - Install Python
@@ -40,6 +66,9 @@ During installation, make sure you tick:
 
 Then complete the installation.
 
+If Python is already installed,
+you can skip this step.
+
 ============================================================
 STEP 2 - Install Ollama
 =======================
@@ -49,6 +78,9 @@ Download Ollama from:
 https://ollama.com/download
 
 Install using the default settings.
+
+If Ollama is already installed,
+you can skip this step.
 
 ============================================================
 STEP 3 - Download the AI Model
@@ -68,9 +100,44 @@ This only needs to be done once.
 STEP 4 - Install EVE
 ====================
 
-Double-click:
+Inside the EVE folder, double-click:
 
 Install EVE.bat
+
+------------------------------------------------------------
+IMPORTANT FOR WINDOWS 11 USERS
+------------------------------------------------------------
+
+Windows may display a message such as:
+
+"Smart App Control blocked a file that may be unsafe."
+
+This does NOT necessarily mean EVE is unsafe.
+
+Windows blocks many downloaded batch (.bat) files because they
+came from the Internet.
+
+If you downloaded EVE directly from:
+
+https://github.com/EVE-ECV/EVE
+
+then this warning is expected during the Alpha release.
+
+If Windows blocks the installer:
+
+1. Right-click Install EVE.bat
+2. Click Properties
+3. If you see an "Unblock" checkbox, tick it.
+4. Click Apply.
+5. Click OK.
+6. Double-click Install EVE.bat again.
+
+If you do not see an "Unblock" option,
+please refer to QUICK START.pdf or visit:
+
+https://evercrew.ai
+
+------------------------------------------------------------
 
 The installer will automatically:
 
@@ -95,11 +162,13 @@ Create a new bot by following BotFather's instructions.
 
 Copy your Bot Token.
 
+Keep it safe.
+
 ============================================================
 STEP 6 - Configure EVE
 ======================
 
-Open the file:
+Open:
 
 .env
 
@@ -134,9 +203,11 @@ Start EVE.bat
 If everything is configured correctly,
 EVE will start and wait for Telegram messages.
 
-IMPORTANT:
+IMPORTANT
 
 Do NOT close the Command Prompt window while EVE is running.
+
+Closing the window will stop EVE.
 
 ============================================================
 STEP 9 - Test EVE
@@ -159,22 +230,20 @@ Congratulations!
 
 Your first local AI workflow is now running.
 
-For screenshots and a visual installation guide,
-please refer to:
-
-QUICK START.pdf
-
 ============================================================
 NEED HELP?
 ==========
 
-Website:
+Website
+
 https://evercrew.ai
 
-Email:
-[support@evercrew.ai](mailto:support@evercrew.ai)
+Email
 
-GitHub:
+support@evercrew.ai
+
+GitHub
+
 https://github.com/EVE-ECV/EVE
 
 ============================================================
@@ -187,7 +256,7 @@ Evercrew Venture Pte Ltd
 Singapore
 
 Our mission is to help SMEs adopt practical,
-private, secure, and affordable local AI solutions.
+private, secure and affordable local AI solutions.
 
 Thank you for supporting the EVE open-source project.
 
