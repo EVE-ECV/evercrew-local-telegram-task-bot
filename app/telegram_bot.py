@@ -237,4 +237,3 @@ app.add_handler(CallbackQueryHandler(handle_confirmation))
 print(f"🚀 EVE v{EVE_VERSION} Telegram Bot is running...")
 
 app.run_polling()
-```
